@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Sign Up</title>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Custom Stylesheet -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+	
+  
+  <form action="/signup" method="post">
+    <div class="login-box animated fadeIn">
+      <div class="box-header">
+				<h2>Sign Up</h2>
+			</div>
+      <label for="username">Username</label>
+      <div>Username: <input type="text" name="username" id="username"> </div>
+      <label for="password">Password</label>
+      <div> Password: <input type="password"  id="password" name="password"> </div>
+      <div><input type="checkbox" onclick="PasswordToggle()">Show Password</div>
+      <div><input type="submit"></div>
+      <div><h3 id="Reject"><%=Reject%></h3></div>
+    </div>
+
+    
+    
+</form>
+
+</body>
+
+
+<script>
+  function PasswordToggle() {
+  var x = document.getElementById("password");
+
+  if(x.type === "password") {
+      x.type = "text";
+  } else {
+      x.type = "password";
+  }
+}
+</script>
+
+
+</html>

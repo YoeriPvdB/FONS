@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
+        rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript"></script>
+
+    <script src="scripts/pagehandler.js"></script>
+    <title>
+        <%=profile_name%>
+    </title>
+
+
+</head>
+
+<body>
+
+    <h1 style="font-size: 100px; margin-left: 10%; margin-top: 1%;"> <a href="/home">FONS</a></h1>
+    <div class="container">
+        <div class="profile-header">
+
+            <div class="searchbar">
+                <form action="/search" method="post">
+                    <input type="text" name="searchTerm" placeholder="Search users..">
+                </form>
+            </div>
+
+            <div class="account-items">
+
+                <a href="<%=logLink%>"><%=logButton%></a>
+                <a href="<%=profLink%>"><%=profButton%></a>
+            </div>
+
+            <!-- <h1><%=username%></h1> -->
+            
+            <div class="profile-image">
+                <a href="/uploadProf">
+                    <img src="images/<%=profileImg%>" alt="uploaded_image">
+                </a>
+                
+            </div>
+
+            <div class="profile-info">
+                <ul style="list-style-type: none;">
+                    <li><h2 id="account-name">
+                        <%=profile_name%>
+                    </h2></li>
+                    
+                </ul>
+
+                
+                
+            </div>
+
+
+            <!-- <div class="profile-stats">
+
+                <ul>
+                    <li><span class="profile-stat-count">164</span> posts</li>
+                    <li><span class="profile-stat-count">188</span> followers</li>
+                    <li><span class="profile-stat-count">206</span> following</li>
+                </ul>
+
+            </div> -->
+
+        </div>
+        <div class="gallery">
+            <%for (var img in files){%>
+
+                <div class="gallery-item" id="post<%=img%>" onclick="CheckPost(id)">
+                    <img src="images/<%= files[img] %>" alt="uploaded_image" class="gallery-image">
+                    <div class="gallery-item-info">
+
+                        <ul>
+                            <li class="gallery-item-likes"><span class="visually-hidden"><i class="fas fa-heart"
+                                        aria-hidden="true" id="likes-count-<%=img%>">
+                                        <%=likes[img]%>
+                                    </i> </li>
+
+                            <li class="gallery-item-comments"><span class="visually-hidden"><i class="fas fa-comment"
+                                        aria-hidden="true"> <%=comment_num[img]%></i>
+                                    
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                
+
+                <%}%>
+
+
+        </div>
+    </div>
+
+   
+
+    
+
+    <div id="viewModal" class="modal">
+
+       
+        <!-- Modal content -->
+        <div class="modal-content">
+            
+
+            <div class="post-image">
+
+                
+                <div class="post-image-frame"><img src="images/<%= files[1]%>" alt="uploaded_image" id="frameImg"></div>
+                
+
+
+            </div>
+            <!-- <input type="submit" class="comment-submit" id="likeID" name="likes"> -->
+            <div class="post-buttons">
+                <h3 id="modalUser" style="position: relative; margin-right:10px;"></h3>
+                <button class="modal-interactive"><i class="fas fa-heart fa-3x"
+                    aria-hidden="true" id="likeID" name="likes"></i></button>
+                <button class="modal-interactive"><i class="fas fa-comment fa-3x"
+                        aria-hidden="true"  id="new-comment-btn" onclick="Show()"></i></button>
+            </div>
+
+            <div class="new-comment-section" id="new-com">
+                <input type="text" id="new-comment" placeholder="Comment..">
+                <input type="submit" id="comment-submit" name="likes">
+
+            </div>
+
+
+            <ul class="comments-list" id="com-list">
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+    
+
+
+</body>
+
+<script>
+    
+//This script is pretty much the same as in the home ejs. Please check that file for the developer comments
+
+
+var viewModal = document.getElementById("viewModal");
+
+var post = document.getElementById("post0");
+
+var modal;
+
+var postId;
+
+var likedbtn = document.getElementById("likeID");
+
+var commentBtn = document.getElementById("comment-submit");
+
+var newComment = document.getElementById("new-com");
+
+var newCommentBtn = document.getElementById("new-comment-btn");
+
+var com_display = false;
+
+var comments_list = document.getElementById("com-list");
+
+
+
+newCommentBtn.onclick = function () {
+
+    if(com_display == false) {
+        newComment.style.display = "block";
+        comments_list.style.height = "48%";
+        com_display = true;
+    } else {
+        newComment.style.display = "none";
+        comments_list.style.height = "50%";
+        com_display = false;
+    }
+    
+    
+}
+
+
+
+
+// When the user clicks anywhere outside of the modal, close it
+window.addEventListener("click", function (event) {
+        
+        if (event.target == viewModal) {
+            modal.style.display = "none";
+            //uploadModal.style.display = "none";
+
+            var oldUser = document.getElementsByClassName("commenter");
+            var oldComments = document.getElementsByClassName("post-comment");
+            for (let i = 0; i < oldComments.length; i++) {
+                oldUser[i].remove();
+                oldComments[i].remove();
+            }
+        }
+        
+    }); 
+
+
+function CheckPost(id) {
+   
+    postId = id.match(/\d+/);
+    modal = viewModal;
+    //var image = document.createElement("img");
+    var postArray = <%- JSON.stringify(files)%>;
+    
+    var image = document.getElementById("frameImg");
+    var url = "images/"+postArray[postId];
+    image.src = url;
+    
+    
+    viewModal.style.display = "block";
+
+    likedbtn.innerHTML = <%- JSON.stringify(likes)%>[postId];
+    
+    
+    var oldUser = document.getElementsByClassName("commenter");
+    var oldComments = document.getElementsByClassName("post-comment");
+    for (let i = 0; i < oldComments.length; i++) {
+        oldUser[i].remove();
+        oldComments[i].remove();
+    }
+
+
+    $.ajax({
+        url: "http://localhost:8000/show_comments",
+        type: "POST",
+        data: {
+            postNum: postId,
+            url: url,
+            //oldComments: com,
+        },
+        success: function (results) {
+
+            document.getElementById("modalUser").innerHTML = results[3] + " - " + results[4];
+            for (let i = 0; i < results[1].length; i++) {
+
+               
+                
+                var commenterLi = document.createElement("li");
+                var commentItem = document.createElement("li");
+                var comment = document.createElement("p");
+
+
+                commenterLi.innerHTML = results[0][i] + " - " + results[2][i];
+                comment.innerHTML = results[1][i];
+                commenterLi.className = "commenter";
+                commentItem.className = "post-comment";
+                commentItem.id = "comment" + results[1][i].length;
+                // comment.innerHTML = "hello";
+
+                var element = document.getElementById("com-list");
+
+
+                element.appendChild(commenterLi);
+                element.appendChild(commentItem);
+
+                var sub_element = document.getElementById("comment" + results[1][i].length);
+                sub_element.appendChild(comment);
+
+                
+                
+            }
+            
+        }
+    });
+}
+
+
+likedbtn.onclick = function () {
+
+    var likes = "<%=likes%>";
+
+    $.ajax({
+        url: "http://localhost:8000/like",
+        type: "POST",
+        data: {
+            post_Id: postId,
+            likedPost: likes[postId],
+        },
+        success: function (result) {
+            var currentPost = document.getElementById('likes-count-' + postId);
+
+
+
+            var newLike = result;
+            currentPost.innerHTML = " " + newLike;
+            likedbtn.innerHTML = newLike;
+            
+            $(currentPost).innerHTML.replaceWith(newLike);
+
+        }
+    });
+}
+
+commentBtn.onclick = function () {
+
+    var profileName = "<%=username%>";
+    var newComment = document.getElementById("new-comment").value;
+    var comments = "<%=comment_num%>";
+    $.ajax({
+        url: "http://localhost:8000/comment",
+        type: "POST",
+        data: {
+            post_Id: postId,
+            comment: newComment,
+            profile_name: profileName,
+
+        },
+        success: function (results) {
+
+
+            var commenterLi = document.createElement("li");
+            var commentItem = document.createElement("li");
+            var comment = document.createElement("p");
+
+            commenterLi.className = "commenter";
+            commenterLi.innerHTML = results[1] + " - " + results[2];
+            commentItem.className = "post-comment";
+            commentItem.id = "comment" + comments.length;
+            comment.innerHTML = results[0];
+
+            var element = document.getElementById("com-list");
+
+
+            element.insertBefore(commentItem, element.firstChild);
+            element.insertBefore(commenterLi, element.firstChild);
+            var com_element = document.getElementById("comment" + comments.length);
+            com_element.insertBefore(comment, com_element.firstChild);
+
+            var currentPost1;
+                
+
+                currentPost1 = document.getElementById('comment-count-' + postId);
+               
+                
+
+                //commentBtn.innerHTML = comments.length;
+                currentPost1.innerHTML = " " + comments.length; 
+                         
+                
+
+        }
+    });
+}
+</script>
+
+
+</html>

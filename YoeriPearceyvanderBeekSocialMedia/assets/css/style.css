@@ -1,0 +1,614 @@
+body {
+	background: url("../images/photo_bg.jpg") no-repeat center center fixed;
+	background-color: antiquewhite;
+	background-size: cover;
+	font-size: 16px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;
+}
+
+/* Typography */
+h1#title {
+	font-family: 'Roboto Slab', serif;
+	font-weight: 300;
+	font-size: 3.2em;
+	color: white;
+	text-shadow: 0 0 10px rgba(0,0,0,0.8);
+	margin: 0 auto;
+	padding-top: 50px;
+	max-width: 300px;
+	text-align: center;
+	position: relative;
+	top: 0px;
+}
+
+h1#title span span {
+	font-weight: 400;
+}
+
+h2 {
+	text-transform: uppercase;
+	color: white;
+	font-weight: 400;
+	letter-spacing: 1px;
+	font-size: 1.4em;
+	line-height: 2.8em;
+}
+
+h3#Reject {
+	color: red;
+}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	color: #aeaeae;
+}
+
+p.small {
+	font-size: 0.8em;
+	margin: 20px 0 0;
+}
+
+
+/* Layout */
+.container {
+	margin: 0;
+}
+
+.top {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.6) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#99000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+}
+.container {
+	
+	max-width: 65vw;
+	margin: auto;
+	
+	padding-bottom: 30px;
+	border-radius: 5px;
+	
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: auto; */
+	
+    padding-bottom: 3rem;
+}
+
+.gallery-item {
+	position: relative;
+	color: #fff;
+	margin: 3px;
+	width: 300px;
+	height: 300px;
+
+	
+    
+}
+
+.gallery-image{
+	
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.gallery-item-info {
+    display: none;
+}
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.gallery-item-likes {
+    margin-right: 20px;
+	margin-left: -40px;
+}
+
+.fa-clone,
+
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+}
+
+
+.login-box {
+	background-color: white;
+	width: 340px;
+	margin: 0 auto;
+	position: relative;
+	top: 160px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+	text-align: center;
+}
+
+.profile-header {
+
+	display: flex;
+	
+	margin-top: 7%;
+	margin-bottom: 10%;
+	/* border-style: solid;
+	border-color: #665851; */
+	
+	/* margin-top: 15vh; */
+	
+}
+
+.profile-image {
+	
+	position: relative;
+	overflow: hidden;
+	width: 300px;
+	height: 300px;
+	right: 20%;
+    /* margin-right: 10%; */
+	/* margin-top: 10%; */
+	/* margin-left: 10%; */
+	border-radius: 90%;
+
+}
+
+ .profile-image img {
+	object-fit: cover;
+	display: inline;
+	margin: 0 auto;
+	height: 100%;
+	width: 100%;
+}
+
+.profile-info {
+	
+	position: relative;
+	display: flex;
+	right: 15%;
+	/* width: 66.666%; */
+
+}
+
+.upload {
+	position: relative;
+	left: 80%;
+	top: 50%;
+}
+
+.profile-header > .account-items {
+	position: relative;
+	left: 75%;
+	top: 5%;
+}	
+
+.account-items > a {
+	margin-right: 10px
+}
+
+.searchbar {
+	position: relative;
+	left: 70%;
+	margin-right: 10px;
+}
+
+#account-name {
+	display: inline-block;
+    font-size: 3.2rem;
+    font-weight: 300;
+	color: #665851;
+}
+
+.profile-stats {
+    margin-top: 2.3rem;
+}
+
+.profile-stats li:last-of-type {
+    margin-right: 0;
+}
+
+.profile-stats li {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    margin-right: 4rem;
+    cursor: pointer;
+}
+
+
+.login-box label {
+	font-weight: 700;
+	font-size: .8em;
+	color: #888;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	line-height: 2em;
+}
+
+.login-box input {
+	margin-bottom: 20px;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: #888;
+}
+
+.login-box input:focus {
+	outline: none;
+	border-color: #665851;
+	transition: 0.5s;
+	color: #665851;
+}
+
+.login-box button {
+	margin-top: 0px;
+	border: 0;
+	border-radius: 2px;
+	color: white;
+	padding: 10px;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 0.7em;
+	letter-spacing: 1px;
+	background-color: #665851;
+	cursor:pointer;
+	outline: none;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+.login-box button:hover {
+	opacity: 0.7;
+	transition: 0.5s;
+}
+
+.selected {
+	color: #665851!important;
+	transition: 0.5s;
+}
+
+/* Animation Delay */
+#logo {
+  animation-duration: 1s;
+  animation-delay: 2s;
+}
+
+.login-box {
+  animation-duration: 0.7s;
+  animation-delay: 0s;
+}
+
+
+
+
+/* The Modal (background) */
+.modal {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	 /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+	  display:block;
+	background-color: #fefefe;
+	border-radius: 1%;
+	margin: 5% auto; /* 15% from the top and centered */
+	height: 80%;
+	
+	border: 1px solid #888;
+	width: 30%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+  }
+
+  .modal-interactive {
+		background: none;
+	 	outline: none;
+	  border: none;
+	  cursor: pointer;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+  .upload-box {
+	  margin-left: 30%;
+	  
+		display: flex;
+		flex-wrap: wrap;
+  }
+
+  #post-description {
+	  float: left;
+	  width: 50%;
+	  resize: none;
+	  margin: 20px;
+  }
+
+  .modal-content > .post-image {
+	  position: relative;
+	  width: 100%;
+	height: 40%;
+		margin: auto;
+		background-color: #665851;
+		border-radius: 1%;
+		display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  .post-image > .post-image-frame {
+	  
+	position:absolute;
+		/* display: block; */
+		
+		height: 100%;
+		margin:auto;
+		overflow-y: hidden;
+		
+		
+  }	
+
+  .post-image-frame > img {
+	
+	max-height: 100%;
+
+	width: 100%;
+	/* object-fit: contain;
+	object-position: 50%; */
+  }
+
+  .new-comment-section {
+	  display: none;
+	  position: relative;
+	  width: 80%;
+	  margin-left: auto;
+	  margin-right: auto;
+  }
+
+  .post-buttons {
+	  display: flex;
+	  position: relative;
+	  left: 25%;
+	  margin: auto;
+	  margin-top: 2%;
+  }
+
+  #new-comment {
+	  
+	  
+	margin: auto;	
+	  height: 5%;
+	  
+	 width: 75%;
+	  
+  }
+
+  .post-comment-box {
+	display: flex;
+    
+    margin: -1rem -1rem;
+	width: 50%;
+    padding-bottom: 3rem;
+  }
+  
+
+  .comments-list {
+	  /* border-style: solid;
+	  border-color: #665851; */
+	  float: left;
+	  list-style-type: none;
+	  position: relative;
+	  left: 0%;
+	  /* top: 100%; */
+	width: 80%;
+	margin-left: 1%;
+	  
+	height: 50%;
+	margin-top: 5%;
+	overflow: auto;
+	display: --webkit;
+	padding-right: 10%;
+  -webkit-box-orient: vertical;  
+  	overflow-x: hidden;
+
+	
+	
+  }
+
+
+  /* ::-webkit-scrollbar {
+	  display: block;
+  } */
+  ::-webkit-scrollbar:hover {
+	  display:contents;
+  }
+  .new-comment {
+	
+	
+	position:inherit;
+  left: 40%;
+  width: 50%;
+  
+  
+  padding-right: 10%;
+	margin-bottom: 10%;
+  height: 20px;
+  }
+
+  #commentBox {
+	  size: 500;
+  }
+  .commenter {
+		padding-top: 5%;
+		border-top-style:solid;
+	border-top-color: #666;
+  }
+
+  .post-comment {
+	/* overflow-x:hidden;
+    overflow-y:auto; */
+	
+    position:relative;
+	
+	color: #665851;
+    /* top:5%; */
+	margin: 5%;
+    /* bottom:5%; */
+	
+    /* border-style: inset;
+	border-bottom: #665851; */
+	
+    width: 100%;
+	margin-right: 0%;
+  }
+
+  /* #new-comment-id {
+	  width: 300px;
+	  height: 100px;
+	  resize: none;
+	  margin-left: 10%;
+  } */
+
+  /* @supports (display: grid) {
+    .profile {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(3, auto);
+        grid-column-gap: 3rem;
+        align-items: center;
+    }
+
+    .profile-image {
+        grid-row: 1 / -1;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+        grid-gap: 2rem;
+    }
+
+    .profile-image,
+    .profile-user-settings,
+    .profile-stats,
+    .profile-bio,
+    .gallery-item,
+    .gallery {
+        width: auto;
+        margin: 0;
+    }
+
+    @media (max-width: 40rem) {
+        .profile {
+            grid-template-columns: auto 1fr;
+            grid-row-gap: 1.5rem;
+        }
+
+        .profile-image {
+            grid-row: 1 / 2;
+        }
+
+        .profile-user-settings {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-gap: 1rem;
+        }
+
+        .profile-edit-btn,
+        .profile-stats,
+        .profile-bio {
+            grid-column: 1 / -1;
+        }
+
+        .profile-user-settings,
+        .profile-edit-btn,
+        .profile-settings-btn,
+        .profile-bio,
+        .profile-stats {
+            margin: 0;
+        }
+    }
+} */
+
+/* Style the tab */
+.tab {
+	overflow: hidden;
+	/* border: 1px solid #ccc;
+	background-color: #f1f1f1; */
+  }
+  
+  /* Style the buttons that are used to open the tab content */
+  .tab button {
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+	background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .tab button.active {
+	background-color: #ccc;
+  }
+  
+  /* Style the tab content */
+  .tabcontent {
+	display: none;
+	padding: 6px 8px;
+	margin-top: 2%;
+	/* border: 1px solid #ccc; */
+	border-top: none;
+  }

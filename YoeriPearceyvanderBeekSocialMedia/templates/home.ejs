@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700|Lato:400,100,300,700,900'
+        rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="index.js"></script>
+    <title>Home</title>
+</head>
+
+<body>
+
+    <h1 style="font-size: 100px; margin-left: 10%; margin-top: 1%;"> <a href="/home">FONS</a></h1>
+
+
+    <div class="container">
+        <div class="profile-header" style="margin-bottom: 5%;">
+
+            
+            <div class="searchbar">
+                <form action="/search" method="post">
+                    <input type="text" name="searchTerm" placeholder="Search users..">
+                </form>
+            </div>
+
+            <div class="account-items" style="left: 70%">
+                <!-- <button>Login</button>
+                <button>Profile</button> -->
+                <a href="<%=logLink%>" id="logID">
+                    <%=logButton%>
+                </a>
+                <a href="<%=profLink%>" id="profID">
+                    <%=profButton%>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Liked', 0)">Popular</button>
+            <button class="tablinks" onclick="openCity(event, 'Recent', 1)">Recent</button>
+            <button class="tablinks" onclick="openCity(event, 'Users', 2)">Users</button>
+            
+        </div>
+
+        <div id="Liked" class="tabcontent">
+
+            <div class="gallery">
+                <%for (var img in files){%>
+                    <!-- <div class="gallery-item">
+                        <img src="images/<%= files[img] %>" alt="uploaded_image" class="gallery-image">
+                    </div> -->
+
+                    <div class="gallery-item" id="post<%=img%>" onclick="CheckPost(id)">
+                        <img src="images/<%= files[img] %>" alt="uploaded_image" class="gallery-image">
+                        <div class="gallery-item-info">
+
+                            <ul>
+                                <li class="gallery-item-likes"><span class="visually-hidden"><i class="fas fa-heart"
+                                            aria-hidden="true" id="likes-count-<%=img%>">
+                                            <%=likes[img]%>
+                                        </i> </li>
+
+                                <li class="gallery-item-comments"><span class="visually-hidden"><i
+                                            class="fas fa-comment" aria-hidden="true" id="comment-count-<%=img%>">
+                                            <%=comment_num[img]%>
+                                        </i>
+                                        
+                                        
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <%}%>
+            </div>
+
+        </div>
+
+        <div id="Recent" class="tabcontent">
+
+
+            <div class="gallery">
+                <%for (var img in recentfiles){%>
+                    <!-- <div class="gallery-item">
+                        <img src="images/<%= files[img] %>" alt="uploaded_image" class="gallery-image">
+                    </div> -->
+
+                    <div class="gallery-item" id="recent_post<%=img%>" onclick="CheckPost(id)">
+                        <img src="images/<%= recentfiles[img] %>" alt="uploaded_image" class="gallery-image">
+                        <div class="gallery-item-info">
+
+                            <ul>
+                                <li class="gallery-item-likes"><span class="visually-hidden"><i class="fas fa-heart"
+                                            aria-hidden="true" id="rec-likes-count-<%=img%>">
+                                            <%=recentLikes[img]%>
+                                        </i> </li>
+
+                                <li class="gallery-item-comments"><span class="visually-hidden"><i
+                                            class="fas fa-comment" aria-hidden="true" id="rec-comment-count-<%=img%>">
+                                            <%=rec_comment_num[img]%>
+                                            
+                                        </i> </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <%}%>
+            </div>
+        </div>
+
+        <div id="Users" class="tabcontent">
+
+            <div class="gallery">
+                <%for (var img in userImages){%>
+                    <!-- <div class="gallery-item">
+                        <img src="images/<%= files[img] %>" alt="uploaded_image" class="gallery-image">
+                    </div> -->
+
+                    <a href="/profile/<%=user_IDs[img]%>">
+                        <div class="gallery-item" id="<%=user_IDs[img]%>">
+                        
+                            <img src="images/<%= userImages[img] %>" alt="uploaded_image" class="gallery-image">
+                            <div class="gallery-item-info">
+    
+                                <h4 id="<%=usernames[img]%>" style="color: aliceblue;"><%=usernames[img]%> </h4>
+    
+                            </div>
+                        </div>
+                            
+                    </a>
+
+                    
+
+                    <%}%>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div id="viewModal" class="modal">
+
+
+        <!-- Modal content -->
+        <div class="modal-content">
+
+
+            <div class="post-image">
+
+
+                <div class="post-image-frame"><img src="images/<%= files[1]%>" alt="uploaded_image" id="frameImg"></div>
+
+
+
+            </div>
+            <!-- <input type="submit" class="comment-submit" id="likeID" name="likes"> -->
+            <div class="post-buttons">
+                <h3 id="modalUser" style="position: relative; margin-right:10px;"></h3>
+                <button class="modal-interactive"><i class="fas fa-heart fa-3x"
+                        aria-hidden="true" id="likeID" name="likes"></i></button>
+                <button class="modal-interactive"><i class="fas fa-comment fa-3x"
+                        aria-hidden="true" id="new-comment-btn" onclick="Show()"></i></button>
+            </div>
+
+            <div class="new-comment-section" id="new-com">
+                <input type="text" id="new-comment" placeholder="Comment..">
+                <input type="submit" id="comment-submit" name="likes">
+
+            </div>
+
+
+            <ul class="comments-list" id="com-list">
+
+
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+<script>
+
+    //script for the home page. I wanted to use an external js file but it would not load
+
+document.getElementById('Liked').style.display = "block";
+document.getElementsByClassName("tablinks")[0].className += " active";
+    var tabNum = 0; //fifgures out which tab was clicked. 0 is popular, 1 is recent, 2 is users
+
+    //code for cycling between tabs on the home page
+    function openCity(evt, tabName, num) {
+
+
+        tabNum = num;
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    } 
+
+    var viewModal = document.getElementById("viewModal"); //modal that opens when user clicks on a post
+
+    var post = document.getElementById("post0");
+
+    var modal;
+
+    var postId; //this is an array index number not an actual id. 
+
+    var likedbtn = document.getElementById("likeID"); //id of like button
+
+    var commentBtn = document.getElementById("comment-submit"); //id of comment submit button
+
+    var newComment = document.getElementById("new-com"); //id of input bar for new comment
+
+    var newCommentBtn = document.getElementById("new-comment-btn"); 
+
+    var com_display = false; //boolean to toggle the new comment input bar on or off
+
+    var comments_list = document.getElementById("com-list"); //id of list of comments on a post
+
+
+
+    newCommentBtn.onclick = function () {
+
+        //shows or hides the input bar for new comments
+        if (com_display == false) {
+            newComment.style.display = "block";
+            comments_list.style.height = "48%";
+            com_display = true;
+        } else {
+            newComment.style.display = "none";
+            comments_list.style.height = "50%";
+            com_display = false;
+        }
+
+
+    }
+
+    
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.addEventListener("click", function (event) {
+        
+        if (event.target == viewModal) {
+            viewModal.style.display = "none";
+            //uploadModal.style.display = "none";
+
+            var oldUser = document.getElementsByClassName("commenter");
+            var oldComments = document.getElementsByClassName("post-comment");
+            for (let i = 0; i < oldComments.length; i++) {
+                oldUser[i].remove();
+                oldComments[i].remove();
+            }
+        }
+        
+    }); 
+    
+    //checks what post was clicked and updates modal with correct information for that post
+    function CheckPost(id) {
+
+        postId = id.match(/\d+/); //checks given id for first instance of a number. sets the postId as that number. First post id = "post0" therefore postId = 0
+        
+        modal = viewModal; 
+       
+        var postArray;
+        var image;
+        var url;
+
+        if (tabNum == 0) {
+
+            postArray = <%-JSON.stringify(files)%>; //marked as an error but does function properly. finds the array called "files" in the ejs and adds it to postArray
+            image = document.getElementById("frameImg"); //image that is displayed in modal
+            url = "images/" + postArray[postId];  //sets url of the image 
+            image.src = url;                        //sets the src of the modal image based on the url variable 
+            likedbtn.innerHTML = <%-JSON.stringify(likes)%> [postId];   //shows the likes based on the likes array from the ejs
+        } else {
+            postArray = <%-JSON.stringify(recentfiles)%>; //does the same as above but check recentfiles array insteas
+
+            image = document.getElementById("frameImg");
+            url = "images/" + postArray[postId];
+            image.src = url;
+            likedbtn.innerHTML = <%-JSON.stringify(recentLikes)%> [postId]; //"recent" is a reference to it being the "recent posts" tab
+        }
+
+
+
+
+        viewModal.style.display = "block"; //shows modal
+
+
+
+        //deletes comments that were shown before hand
+        var oldUser = document.getElementsByClassName("commenter");
+        var oldComments = document.getElementsByClassName("post-comment");
+        for (let i = 0; i < oldComments.length; i++) {
+            oldUser[i].remove();
+            oldComments[i].remove();
+        }
+
+
+        $.ajax({
+            url: "http://localhost:8000/show_comments",
+            type: "POST",
+            data: {
+                postNum: postId,
+                url: url,
+                tabNum: tabNum,
+                //oldComments: com,
+            },
+            success: function (results) {
+
+                //sets the post's user and date based off the results
+                document.getElementById("modalUser").innerHTML = results[3] + " - " + results[4];
+
+
+                //for every comment
+                for (let i = 0; i < results[1].length; i++) {
+                    var commenterLi = document.createElement("li"); //creates a list item for the commenter
+                    var commentItem = document.createElement("li"); //creates a list item for the comment
+                    var comment = document.createElement("p");  //creates a paragraph for the comment
+
+
+                    commenterLi.innerHTML = results[0][i] + " - " + results[2][i]; //sets the commenter as the correct name + date 
+                    comment.innerHTML = results[1][i]; //sets the comment they posted
+                    commenterLi.className = "commenter"; //adds a class
+                    commentItem.className = "post-comment";
+                    commentItem.id = "comment" + results[1][i].length; //adds an id
+                    
+
+                    var element = document.getElementById("com-list"); //find the main parent div
+
+
+                    element.appendChild(commenterLi); //adds the commenter li to the parennt div
+                    element.appendChild(commentItem);  //adds the comment li to the parent div
+
+                    var sub_element = document.getElementById("comment" + results[1][i].length); //finds comment element
+                    sub_element.appendChild(comment); //adds to the comment element
+
+                    //document.getElementById("modalUser").innerHTML = results[3] + " - " + results[4];
+                }
+
+            }
+        });
+    }
+
+    //ajax to handle likes
+    likedbtn.onclick = function () {
+
+        var likes = "<%=likes%>";
+        
+
+        $.ajax({
+            url: "http://localhost:8000/like",
+            type: "POST",
+            data: {
+                post_Id: postId,
+                likedPost: likes[postId],
+                tabNum: tabNum,
+            },
+            success: function (result) {
+                var currentPost
+                if(tabNum == 0) {
+                    currentPost = document.getElementById('likes-count-' + postId); //finds the liked post
+                } else {
+                    currentPost = document.getElementById('rec-likes-count-' + postId);
+                }
+                 
+
+
+                //changes shown number for new likes from result
+                var newLike = result;
+                currentPost.innerHTML = " " + newLike;
+                likedbtn.innerHTML = newLike;
+
+                $(currentPost).innerHTML.replaceWith(newLike);
+
+            }
+        });
+    }
+
+    commentBtn.onclick = function () {
+
+
+        var newComment = document.getElementById("new-comment").value;
+        var comments;
+        if(tabNum == 0) {
+            comments = "<%=comment_num%>";
+        } else {
+            comments = "<%=rec_comment_num%>";
+        }
+
+        alert(comments);
+        // 
+        $.ajax({
+            url: "http://localhost:8000/comment",
+            type: "POST",
+            data: {
+                post_Id: postId,
+                comment: newComment,
+                tabNum: tabNum,
+                // profile_name: profileName,
+
+            },
+            success: function (results) {
+
+                //same as with shown comments 
+               
+                var commenterLi = document.createElement("li");
+                var commentItem = document.createElement("li");
+                var comment = document.createElement("p");
+                
+                commenterLi.className = "commenter";
+                
+                commenterLi.innerHTML = results[1] + " - " + results[2];
+                
+                commentItem.className = "post-comment";
+                
+                commentItem.id = "comment" + comments.length;
+                
+                comment.innerHTML = results[0];
+
+                var element = document.getElementById("com-list");
+
+
+
+                //inserts before the element so the new comment appear at the top of the comment list
+
+                element.insertBefore(commentItem, element.firstChild);
+                element.insertBefore(commenterLi, element.firstChild);
+                var com_element = document.getElementById("comment" + comments.length);
+                com_element.insertBefore(comment, com_element.firstChild);
+
+                var currentPost1;
+                var currentPost2;
+
+                //updates comment count
+                currentPost1 = document.getElementById('comment-count-' + postId);
+                currentPost2 = document.getElementById('rec-comment-count-' + postId);
+                
+                var newComment = comments[postId] + 1;
+                //commentBtn.innerHTML = comments.length;
+                currentPost1.innerHTML = " " + newComment; 
+                currentPost2.innerHTML = " " + newComment;         
+                
+
+            }
+        });
+    }
+</script>
+
+
+</html>
