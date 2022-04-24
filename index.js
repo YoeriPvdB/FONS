@@ -31,6 +31,13 @@ app.use(express.static("assets"));
 app.set("view engine", "ejs");
 app.set("views", "templates");
 
+module.exports = {
+    HOST: "eu-cdbr-west-02.cleardb.net",
+    USER: "bb180c67024427",
+    PASSWORD: "bfda33f9",
+    DB: "heroku_12538cc72d22254"
+  };
+
 // var con = mysql.createConnection({
 //     host: "mysql.scss.tcd.ie",
 //     user: "pearceyy",
@@ -45,12 +52,12 @@ var con = new Pool({
 //     rejectUnauthorized: false
 //   }
 user: process.env.USER,      //postgres user
-host: process.env.ENDPOINT,  //localhost (I also tried 127.0.0.1)
+host: '127.0.0.01',  //localhost (I also tried 127.0.0.1)
 database: process.env.DATABASE_URL,    //database name to connect to
-password: process.env.PG_PASS,  //postgres user password
-port: process.env.PORT||'8080',
+password: 'uptheirons',  //postgres user password
+port: process.env.PORT||'5243',
 
-    ssl: false
+rejectUnauthorized: false
     
 });
 
