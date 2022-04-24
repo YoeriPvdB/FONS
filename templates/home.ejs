@@ -339,7 +339,7 @@ document.getElementsByClassName("tablinks")[0].className += " active";
 
 
         $.ajax({
-            url: "http://localhost:8000/show_comments",
+            url: "http://localhost:8080/show_comments",
             type: "POST",
             data: {
                 postNum: postId,
@@ -390,7 +390,7 @@ document.getElementsByClassName("tablinks")[0].className += " active";
         
 
         $.ajax({
-            url: "http://localhost:8000/like",
+            url: "http://localhost:8080/like",
             type: "POST",
             data: {
                 post_Id: postId,
@@ -432,7 +432,7 @@ document.getElementsByClassName("tablinks")[0].className += " active";
         alert(comments);
         // 
         $.ajax({
-            url: "http://localhost:8000/comment",
+            url: "http://localhost:8080/comment",
             type: "POST",
             data: {
                 post_Id: postId,

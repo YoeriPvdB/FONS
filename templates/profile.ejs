@@ -247,7 +247,7 @@ function CheckPost(id) {
 
 
     $.ajax({
-        url: "http://localhost:8000/show_comments",
+        url: "http://localhost:8080/show_comments",
         type: "POST",
         data: {
             postNum: postId,
@@ -296,7 +296,7 @@ likedbtn.onclick = function () {
     var likes = "<%=likes%>";
 
     $.ajax({
-        url: "http://localhost:8000/like",
+        url: "http://localhost:8080/like",
         type: "POST",
         data: {
             post_Id: postId,
@@ -323,7 +323,7 @@ commentBtn.onclick = function () {
     var newComment = document.getElementById("new-comment").value;
     var comments = "<%=comment_num%>";
     $.ajax({
-        url: "http://localhost:8000/comment",
+        url: "http://localhost:8080/comment",
         type: "POST",
         data: {
             post_Id: postId,

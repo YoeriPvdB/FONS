@@ -38,28 +38,47 @@ app.set("views", "templates");
 //     database: "pearceyy_db" // Enter your database name
 // });
 
-// const { Pool } = require('pg');
-// const pool = new Pool({
+const { Pool } = require('pg');
+var con = new Pool({
 //   connectionString: process.env.DATABASE_URL,
 //   ssl: {
 //     rejectUnauthorized: false
 //   }
+user: process.env.USER,      //postgres user
+host: process.env.ENDPOINT,  //localhost (I also tried 127.0.0.1)
+database: process.env.DATABASE_URL,    //database name to connect to
+password: process.env.PG_PASS,  //postgres user password
+port: process.env.PORT||'8080',
+
+    ssl: false
+    
+});
+
+con.connect();
+
+// let db = require('postgresql-query');
+
+// db.config({
+//     username: '',
+//     password: '',
+//     host: '',
+//     database: '' 
 // });
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Newsflash69",           //my home database
-    database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
-});
+// var con = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "Newsflash69",           //my home database
+//     database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
+// });
 
-con.connect(function (err) {
-    if (err) {
-        console.log(" Error connecting to Database " + err);
-    } else {
-        console.log(" Connected to Database ");
-    }
-});
+// con.connect(function (err) {
+//     if (err) {
+//         console.log(" Error connecting to Database " + err);
+//     } else {
+//         console.log(" Connected to Database ");
+//     }
+// });
 
 // const { Client } = require('pg');
 
