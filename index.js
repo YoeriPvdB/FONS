@@ -46,39 +46,39 @@ app.set("views", "templates");
 //   }
 // });
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "Newsflash69",           //my home database
-//     database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
-// });
-
-// con.connect(function (err) {
-//     if (err) {
-//         console.log(" Error connecting to Database " + err);
-//     } else {
-//         console.log(" Connected to Database ");
-//     }
-// });
-
-const { Client } = require('pg');
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Newsflash69",           //my home database
+    database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
 });
 
-client.connect();
-
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  client.end();
+con.connect(function (err) {
+    if (err) {
+        console.log(" Error connecting to Database " + err);
+    } else {
+        console.log(" Connected to Database ");
+    }
 });
+
+// const { Client } = require('pg');
+
+// const client = new Client({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false
+//   }
+// });
+
+// client.connect();
+
+// client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+//   if (err) throw err;
+//   for (let row of res.rows) {
+//     console.log(JSON.stringify(row));
+//   }
+//   client.end();
+// });
 
 //sets up cookies 
 app.use(session({
