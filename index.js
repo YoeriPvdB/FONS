@@ -32,13 +32,13 @@ app.set("view engine", "ejs");
 app.set("views", "templates");
 
 const dbConfig = require("./db_config.js");
-var con = mysql.createConnection({
-  host: dbConfig.HOST,
-  user: dbConfig.USER,
-  password: dbConfig.PASSWORD,
-  database: dbConfig.DB
-});
-module.exports = con;
+// var con = mysql.createConnection({
+//   host: local,
+//   user: dbConfig.USER,
+//   password: dbConfig.PASSWORD,
+//   database: dbConfig.DB
+// });
+// module.exports = con;
 
 // var con = mysql.createConnection({
 //     host: "mysql.scss.tcd.ie",
@@ -74,12 +74,12 @@ module.exports = con;
 //     database: '' 
 // });
 
-// var con = mysql.createConnection({
-//     host: "localhost",
-//     user: "root",
-//     password: "Newsflash69",           //my home database
-//     database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
-// });
+var con = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "Newsflash69",           //my home database
+    database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
+});
 
 con.connect(function (err) {
     if (err) {
@@ -125,9 +125,9 @@ app.get("/", function (req, res) {
 
 
     
-    res.redirect("/home");
+    //res.redirect("/home");
 
-
+    res.render("test.ejs");
 });
 
 
