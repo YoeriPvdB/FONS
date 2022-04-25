@@ -31,12 +31,14 @@ app.use(express.static("assets"));
 app.set("view engine", "ejs");
 app.set("views", "templates");
 
-module.exports = {
-    HOST: "eu-cdbr-west-02.cleardb.net",
-    USER: "bb180c67024427",
-    PASSWORD: "bfda33f9",
-    DB: "heroku_12538cc72d22254"
-  };
+const dbConfig = require("./db_config.js");
+var con = mysql.createConnection({
+  host: dbConfig.HOST,
+  user: dbConfig.USER,
+  password: dbConfig.PASSWORD,
+  database: dbConfig.DB
+});
+module.exports = con;
 
 // var con = mysql.createConnection({
 //     host: "mysql.scss.tcd.ie",
@@ -45,23 +47,23 @@ module.exports = {
 //     database: "pearceyy_db" // Enter your database name
 // });
 
-const { Pool } = require('pg');
-var con = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-user: process.env.USER,      //postgres user
-host: '127.0.0.01',  //localhost (I also tried 127.0.0.1)
-database: process.env.DATABASE_URL,    //database name to connect to
-password: 'uptheirons',  //postgres user password
-port: process.env.PORT||'5243',
+// const { Pool } = require('pg');
+// var con = new Pool({
+// //   connectionString: process.env.DATABASE_URL,
+// //   ssl: {
+// //     rejectUnauthorized: false
+// //   }
+// user: process.env.USER,      //postgres user
+// host: '127.0.0.01',  //localhost (I also tried 127.0.0.1)
+// database: process.env.DATABASE_URL,    //database name to connect to
+// password: 'uptheirons',  //postgres user password
+// port: process.env.PORT||'5243',
 
-rejectUnauthorized: false
+// rejectUnauthorized: false
     
-});
+// });
 
-con.connect();
+// con.connect();
 
 // let db = require('postgresql-query');
 
@@ -79,13 +81,13 @@ con.connect();
 //     database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
 // });
 
-// con.connect(function (err) {
-//     if (err) {
-//         console.log(" Error connecting to Database " + err);
-//     } else {
-//         console.log(" Connected to Database ");
-//     }
-// });
+con.connect(function (err) {
+    if (err) {
+        console.log(" Error connecting to Database " + err);
+    } else {
+        console.log(" Connected to Database ");
+    }
+});
 
 // const { Client } = require('pg');
 
