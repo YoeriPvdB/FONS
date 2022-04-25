@@ -74,20 +74,21 @@ const dbConfig = require("./db_config.js");
 //     database: '' 
 // });
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "Newsflash69",           //my home database
-    database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
-});
+// var con = mysql.createConnection({
+    
+//     host: "localhost",
+//     user: "root",
+//     password: "Newsflash69",           //my home database
+//     database: "pearceyy_db"   //I accidentally had my database named "pearceyy" instead of "pearceyy_db" when working on my home computer. That might affect something
+// });
 
-con.connect(function (err) {
-    if (err) {
-        console.log(" Error connecting to Database " + err);
-    } else {
-        console.log(" Connected to Database ");
-    }
-});
+// con.connect(function (err) {
+//     if (err) {
+//         console.log(" Error connecting to Database " + err);
+//     } else {
+//         console.log(" Connected to Database ");
+//     }
+// });
 
 // const { Client } = require('pg');
 
